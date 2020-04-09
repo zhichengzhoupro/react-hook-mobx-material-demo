@@ -1,26 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Route, Switch} from 'react-router-dom';
+import {mainRoutes} from "./routers/Routers";
+import { ThemeProvider } from '@material-ui/styles';
+import theme from "./theme";
+import {RouteWithLayout} from "./components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+            <Switch>
+                {
+                    mainRoutes.map((route:any) => {
+                        return <RouteWithLayout layout={route.layout} component={route.component} exact={route.isExact}/>
+                    })
+                }
+            </Switch>
+            </ThemeProvider>
+
+
+        </>
+    );
 }
 
 export default App;
