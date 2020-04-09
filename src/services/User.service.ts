@@ -3,7 +3,7 @@ import BaseHttpService from "./BasicHttp.service";
 export default class UserService extends BaseHttpService {
 
      async signin(username: string, password: string, isRememberMe: boolean) {
-         const result: any = await this.post('/auth/signin', {username, password});
+         const result: any = await this.post('/service/signin', {username, password});
          const accessToken = result.data.accessToken;
          const user = result.data.user;
          this.saveToken(accessToken);

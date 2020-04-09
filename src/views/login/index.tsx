@@ -276,7 +276,7 @@ class Login extends Component<LoginProps, LoginState> {
                                         helperText={
                                             this.hasError('email') ? 'test message email' : null
                                         }
-                                        label="User name"
+                                        label="UserEntity name"
                                         name="username"
                                         onChange={e => this.setState({username: e.target.value})}
                                         type="email"
