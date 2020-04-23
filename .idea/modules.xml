@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../nest-backend/.idea/nest-backend.iml" filepath="$PROJECT_DIR$/../nest-backend/.idea/nest-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/react-hook-mobx-material-demo.iml" filepath="$PROJECT_DIR$/.idea/react-hook-mobx-material-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react/react-material-dashboard/.idea/react-material-dashboard.iml" filepath="$PROJECT_DIR$/../react/react-material-dashboard/.idea/react-material-dashboard.iml" />
     </modules>
   </component>
 </project>

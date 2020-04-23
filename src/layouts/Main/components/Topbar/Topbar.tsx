@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -7,8 +7,9 @@ import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import {UserContext} from "../../../../context/User.context";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme:any) => ({
   root: {
     boxShadow: 'none'
   },
@@ -20,13 +21,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Topbar = props => {
+const Topbar = (props: any) => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
 
   const [notifications] = useState([]);
 
+  const userContext: any = useContext(UserContext);
   return (
     <AppBar
       {...rest}
@@ -53,6 +55,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={userContext.signOutHandler}
           >
             <InputIcon />
           </IconButton>

@@ -3,27 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createBrowserHistory} from 'history';
-import {RouterStore, syncHistoryWithStore} from 'mobx-react-router';
-import {Provider} from 'mobx-react';
-import {Router} from 'react-router'
-
-const services: any = {};
-const stores: any = {};
-
-// add routesotre to stores
-stores.routerStore = new RouterStore();
-const browserHistory = createBrowserHistory();
-const history = syncHistoryWithStore(browserHistory, stores.routerStore);
-
+import {BrowserRouter as Router} from 'react-router-dom'
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider {...stores}>
-            <Router history={history}>
+            <Router >
                 <App/>
             </Router>
-        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );

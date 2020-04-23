@@ -1,25 +1,22 @@
 import axios from 'axios'
+import {removeLocalStorageInformation} from "../helpers/comme.util";
+import history from "../helpers/history";
 
 export default class BaseHttpService {
 
-    BASE_URL = '';
+    BASE_URL = 'http://localhost:3000';
     _accessToken = '';
-    private routerStore: any;
 
-    constructor(routerStore: any) {
-        this.routerStore = routerStore;
-    }
-
-    get(url: string, options ={}) {
+    get(url: string, options = {}) {
         Object.assign(options, this.addAuthInOption());
         return axios.get(`${this.BASE_URL}/${url}`, options).catch((error) => {
             this.handleError(error);
         })
     }
 
-    post(url: string, data= {},  options ={}) {
+    post(url: string, data = {}, options = {}) {
         Object.assign(options, this.addAuthInOption());
-        return axios.post(`${this.BASE_URL}/${url}`,data, options).catch((error) => {
+        return axios.post(`${this.BASE_URL}/${url}`, data, options).catch((error) => {
             this.handleError(error);
         })
     }
@@ -27,7 +24,7 @@ export default class BaseHttpService {
     addAuthInOption = (): any => {
         return {
             headers: {
-                Auth: 'Bear ' + this.accessToken
+                Authorization: 'Bearer ' + this.accessToken
             }
         };
     };
@@ -36,19 +33,18 @@ export default class BaseHttpService {
         return this._accessToken ? this._accessToken : this.loadToken();
     }
 
-    loadToken = ()=> {
+    loadToken = () => {
         const token: any = window.localStorage.getItem('accessToken');
         this._accessToken = token;
-        return token
+        return token;
     };
 
-    saveToken(accessToken: string) {
-        this._accessToken = accessToken;
-        return localStorage.setItem('accessToken', accessToken);
-    }
+    handleError = (error: any) => {
+        const {status} = error.response;
 
-    private handleError(error: any) {
-        const {statusCode} = error.response.data;
-
-    }
+        if (status === 401) {
+            removeLocalStorageInformation();
+            window.location.href = '/sign-in';
+        }
+    };
 }

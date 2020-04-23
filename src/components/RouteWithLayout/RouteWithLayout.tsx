@@ -9,9 +9,15 @@ const RouteWithLayout = (props: any) => {
             {...rest}
             render={(matchProps) => {
                 return (
-                    <Layout>
-                        <Component {...matchProps} />
-                    </Layout>
+                    <>
+                        {
+                            Layout !== null ? <Layout>
+                                <Component {...matchProps} />
+                            </Layout> :  <Component {...matchProps} />
+                        }
+                    </>
+
+
                 )
             }}
         />

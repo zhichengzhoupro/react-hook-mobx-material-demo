@@ -6,7 +6,7 @@ import { useMediaQuery } from '@material-ui/core';
 
 import { Sidebar, Topbar, Footer } from './components';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {
     paddingTop: 56,
     height: '100%',
@@ -22,11 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Main = props => {
+const Main = (props: any) => {
   const { children } = props;
 
   const classes = useStyles();
-  const theme = useTheme();
+  const theme: any = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true
   });
