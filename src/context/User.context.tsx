@@ -4,8 +4,17 @@ import {withRouter} from "react-router";
 import history from "../helpers/history";
 import UserService from "../services/User.service";
 import {getLocalStorageUserInfo} from "../helpers/comme.util";
+import {UserReducer} from "../reducers";
 
 export const UserContext = createContext({});
+
+const initialState = {
+    avatarUrl: '',
+    avatarUploading: false,
+    avatarUploadError: '',
+    avatarChanged: false,
+};
+
 
 const UserContextProvider = (props: any) => {
 
@@ -24,7 +33,6 @@ const UserContextProvider = (props: any) => {
 
         UserService.signIn(userInfo.email, userInfo.password, true)
             .then((data) => {
-                console.log(data);
                 saveUserIfRemember(true, data.user);
                 saveToken(data.accessToken);
                 setIsAuthenticated(true);
@@ -62,7 +70,7 @@ const UserContextProvider = (props: any) => {
 
     const removeUser = () => {
         localStorage.removeItem('user');
-        sessionStorage.removeItem('user+%£Ô');
+        sessionStorage.removeItem('user');
     };
 
     const saveUserIfRemember = (isRememberMe: boolean, user: any) => {
@@ -74,7 +82,13 @@ const UserContextProvider = (props: any) => {
     };
 
     return (
-        <UserContext.Provider value={{user, signInHandler, isAuthenticated, signUpHandler, signOutHandler}}>
+        <UserContext.Provider value={{
+            user,
+            signInHandler,
+            isAuthenticated,
+            signUpHandler,
+            signOutHandler,
+        }}>
             {props.children}
         </UserContext.Provider>
     );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -13,6 +13,7 @@ import {
     Button,
     LinearProgress
 } from '@material-ui/core';
+import {UserReducer} from "../../../../reducers";
 
 const useStyles = makeStyles((theme: any) => ({
     root: {},
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme: any) => ({
         height: 110,
         width: 100,
         flexShrink: 0,
-        flexGrow: 0
+        flexGrow: 0,
+        cursor: 'pointer'
     },
     progress: {
         marginTop: theme.spacing(2)
@@ -37,22 +39,17 @@ const useStyles = makeStyles((theme: any) => ({
 const UserProfile = (props: any) => {
     const { user, className, ...rest } = props;
 
-    const [uploadOpen, setUploadOpen] = useState(false);
+    const [avatarFile, setAvatarFile] = useState('');
+
+
 
     const classes: any = useStyles();
 
-    const uploadAvatar =  () => {
-        console.log('upload avatar');
-        setUploadOpen(true);
+    const uploadAvatar =  (e: any) => {
+        const file = e.target.files[0];
+        console.log('upload avatar', e.target.files);
+
     };
-
-    const handleUploadClose = () => {
-        console.log('upload close');
-    }
-
-    const handleUploadSave = (e: any) => {
-        console.log('upload save');
-    }
 
     return (
         <Card
@@ -83,10 +80,9 @@ const UserProfile = (props: any) => {
                             {moment().format('hh:mm A')} ({user.timezone})
                         </Typography>
                     </div>
-                    <label htmlFor="contained-button-file">
+                    <label htmlFor="contained-button-file"   className={classes.avatar}>
                         <Avatar
                             className={classes.avatar}
-                            onClick={uploadAvatar}
                             src={user.avatarUrl}
                         />
                     </label>
@@ -97,6 +93,8 @@ const UserProfile = (props: any) => {
                         multiple
                         type="file"
                         style={{display: 'none'}}
+                        value={avatarFile}
+                        onChange={uploadAvatar}
                     />
                 </div>
                 <div className={classes.progress}>

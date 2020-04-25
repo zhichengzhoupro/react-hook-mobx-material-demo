@@ -6,5 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="nest-backend" />
     <orderEntry type="module" module-name="react-material-dashboard" />
+    <orderEntry type="module" module-name="react-hook-mobx" />
+    <orderEntry type="module" module-name="task-management-frontend" />
   </component>
 </module>

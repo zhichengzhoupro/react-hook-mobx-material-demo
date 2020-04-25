@@ -25,7 +25,17 @@ function UserInformation(props: { onChange: (event: any) => void, user: any }) {
                             md={6}
                             xs={12}
                         >
-
+                            <TextField
+                                fullWidth
+                                helperText="Please specify the username"
+                                label="User name"
+                                margin="dense"
+                                name="username"
+                                onChange={props.onChange}
+                                required
+                                value={props.user.username || ''}
+                                variant="outlined"
+                            />
                         </Grid>
                     </Grid>
                 </CardContent>
